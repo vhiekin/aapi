@@ -1,0 +1,230 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Fictional customer-service API",
+    "version": "1.0.0",
+    "description": "Illustrative contract only. No implementation or reachable service. Descriptions do not enforce business rules."
+  },
+  "servers": [
+    {
+      "url": "https://service.example.invalid"
+    }
+  ],
+  "security": [
+    {
+      "executorBearer": []
+    }
+  ],
+  "paths": {
+    "/customers/{customerId}/billing": {
+      "put": {
+        "operationId": "configureBilling",
+        "description": "Configure monthly billing for an existing eligible customer. Does not collect payment or create historical invoices.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "cycle": {
+                    "type": "string",
+                    "enum": [
+                      "monthly"
+                    ]
+                  }
+                },
+                "required": [
+                  "cycle"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "billingRecordId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "billingRecordId"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Application precondition is not satisfied; no success is implied."
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/service": {
+      "put": {
+        "operationId": "activateService",
+        "description": "Activate the standard service only after billing is configured for this customer; the billing record must belong to that customer.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "enum": [
+                      "standard"
+                    ]
+                  },
+                  "billingRecordId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "package",
+                  "billingRecordId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "serviceId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "serviceId"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Application precondition is not satisfied; no success is implied."
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/reporting": {
+      "put": {
+        "operationId": "enableReporting",
+        "description": "Enable reporting only for this customer's active service.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "serviceId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "const": true
+                  }
+                },
+                "required": [
+                  "serviceId",
+                  "enabled"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "reportingEnabled": {
+                      "type": "boolean",
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "reportingEnabled"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Application precondition is not satisfied; no success is implied."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "executorBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Only the trusted executor receives a credential; not supplied here."
+      }
+    },
+    "schemas": {}
+  }
+}

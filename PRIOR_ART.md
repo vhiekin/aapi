@@ -1,0 +1,25 @@
+# Prior art and compatibility
+
+Source status checked on 2026-11-24. These are scope comparisons, not claims of conformance, certification or endorsement. “Not defined here” does not mean an ecosystem cannot implement it.
+
+| Work | What it contributes | Relationship to this discussion |
+|---|---|---|
+| [JSON Schema 2020-12](https://json-schema.org/draft/2020-12/json-schema-validation), [OpenAPI](https://spec.openapis.org/oas/v3.1.1.html) | Structural data constraints and HTTP API descriptions | Reuse schemas/operation identifiers. Valid data alone does not prove prerequisite state or permission. |
+| [CloudFormation templates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html), [dependencies](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-attribute-dependson.html) | Native resource declarations, references and ordered lifecycle operations | Strong precedent for an author producing data that another system executes. |
+| [Terraform saved plans](https://developer.hashicorp.com/terraform/cli/commands/plan), [apply](https://developer.hashicorp.com/terraform/cli/commands/apply) | Reviewed plans and separate execution | Existing plan/apply precedent. Passing a saved plan to apply counts as approval; protect that execution boundary. |
+| [Arazzo 1.0.1](https://spec.openapis.org/arazzo/v1.0.1.html), [1.1.0](https://spec.openapis.org/arazzo/v1.1.0.html) | Workflow order, composition, bindings and outcome criteria | Native syntax for the customer example. 1.1.0 is newer; 1.0.1 is selected for a smaller, widely documented tool-compatible example. |
+| [Open Workflow v1.0.0](https://github.com/open-workflow-specification/specification/blob/v1.0.0/dsl.md), [Java runtime](https://github.com/open-workflow-specification/sdk-java/tree/main/impl) | Functions/catalogs, control/data flow and independent execution implementations | A candidate alternative using existing runtime machinery, not a requirement to adopt another engine. Runtime/version support must be checked. |
+| [PDDL2.1](https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume20/fox03a.pdf), [HTN/HDDL](https://www.uni-ulm.de/fileadmin/website_uni_ulm/iui.inst.090/Publikationen/2020/Hoeller2020HDDL.pdf) | State/action models, prerequisites/effects, methods, hierarchy and partial order | Planning-community languages with formal semantics. API grounding and live-state verification remain integration work. |
+| [OWL-S](https://www.w3.org/submissions/OWL-S/), [WoT TD 1.1](https://www.w3.org/TR/wot-thing-description/) | Service semantics/grounding; interaction affordances, models and semantic annotations | Important semantic-description prior art. OWL-S 1.1 is a W3C Member Submission; WoT TD 1.1 is a Recommendation. |
+| [MCP tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools), [authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization) | Tool discovery/calls, schemas, human-control guidance and OAuth transport authorization | Can expose authoring/read tools. This proposal does not claim MCP lacks consent or authentication. |
+| [AICP draft-paxton-aicp-00](https://datatracker.ietf.org/doc/draft-paxton-aicp/00/) | Infrastructure capabilities, intent, plans, authorization and outcome/reconciliation lifecycle | Close conceptual overlap. Individual Internet-Draft, not an adopted IETF standard or RFC; implementation not assessed here. |
+| [AGT ADR-0030](https://github.com/microsoft/agent-governance-toolkit/blob/main/docs/adr/0030-action-bound-approval-protocol.md), [coordinator implementation](https://github.com/microsoft/agent-governance-toolkit/blob/main/agent-governance-python/agent-mesh/src/agentmesh/governance/approval_protocol/coordinator.py) | Exact-action binding, approval chains and execution-time checks | Accepted ADR with implementation code; no security certification implied. Approval binding is existing work. |
+| [AP2 authorization](https://ap2-protocol.org/ap2/agent_authorization/) | Human mandates, constrained delegation, transaction binding and receipts | Payments-oriented, explicitly extensible beyond payments. No claim that generalized authorization is a new gap. |
+
+## Adjacent community work
+
+[Arazzo actor-in-the-loop PR #568](https://github.com/OAI/Arazzo-Specification/pull/568) was open against `v1.2-dev` when checked. It is proposed, not a released 1.0.1/1.1.0 capability. The example does not use it. Human approval occurs before the separate executor starts.
+
+[Open Workflow discussion #915](https://github.com/open-workflow-specification/specification/discussions/915) explores agent workflows/runtime participants. Here the agent is only an author; no inference task is required inside the resulting workflow.
+
+[Respect CLI](https://redocly.com/docs/cli/commands/respect) executes Arazzo API tests, but its documented input-schema mismatch handling is a warning rather than a refusal, and its 1.1 support is selective. It is evidence of tooling, not proof that this repository has a production authorization/validation runtime.
