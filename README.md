@@ -19,6 +19,7 @@ The authoring agent has no apply or domain-mutation permissions. It cannot grant
 - [Proposal and candidate semantics](PROPOSAL.md)
 - [Infrastructure example: native CloudFormation](examples/cloudformation/README.md)
 - [Reproducible customer activation: trusted methods, Arazzo and Open Workflow](examples/customer-service/README.md)
+- [Real native catalog/runtime experiment and results](experiments/native-runtime/README.md)
 - [Prior art, overlap and compatibility](PRIOR_ART.md)
 - [Questions for maintainers and implementers](FEEDBACK.md)
 - [What has and has not been validated](VALIDATION.md)
@@ -26,7 +27,7 @@ The authoring agent has no apply or domain-mutation permissions. It cannot grant
 
 The [customer experiment](examples/customer-service/README.md) includes two pinned methods, constrained author submissions, controlled state/ownership negatives and an offline checker. It demonstrates method selection and parameter substitution, not arbitrary composition. See [exact reproduction commands](VALIDATION.md).
 
-The examples are fictional and illustrative. No application endpoints, credentials, deploy commands or runtime are supplied. Native schemas can establish structural validity; they do not establish authorization or prove application effects.
+The declaration examples are fictional. A separate native experiment runs a released workflow runtime against owned localhost mocks; no real business/cloud service or credentials are supplied. Native schemas can establish structural validity, not authorization. The measured experiment distinguishes native runtime behavior from mock application guards and untested production integration.
 
 ## License and authorship
 

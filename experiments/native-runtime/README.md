@@ -1,6 +1,6 @@
 # Native catalog/runtime experiment
 
-**Author run completed on 2026-11-24; independent rerun pending.** The authoring agent is outside execution. A trusted Java harness runs real native catalog functions against its own localhost business mock. No real business/cloud API or approval ceremony is involved.
+**Author and independent AI-assisted reruns completed on 2026-11-24.** The authoring agent is outside execution. A trusted Java harness runs real native catalog functions against its own localhost business mock. No real business/cloud API or approval ceremony is involved.
 
 ## Declared venue and command
 
@@ -56,6 +56,8 @@ The native catalog endpoint serves frozen function bytes at `main/functions/<nam
 Before the container probe the harness inspects loaded runnable providers and aborts if any container provider is present. No Docker executable, image pull or container runtime is invoked. A shell-policy regression would at worst try a deliberately nonexistent harmless executable; success requires the native “not allowed” refusal, not merely an OS error.
 
 ## Measured results
+
+The [independent review record](review.json) and [rerun result](results-reviewer.json) confirm matching source, all 49 runtime JAR hashes and all nine expected/actual case records after normalizing only ephemeral loopback ports. Both compile and runtime commands exited zero; no experiment process remained. This is AI-assisted review, not an external human expert assessment.
 
 The [machine-readable author result](results.json) records expected versus actual behavior, failure phase, catalog paths/digests, request payloads and effects. Java 17.0.21 with runtime 7.35.4.Final met all nine case expectations. Both native methods completed with correct output bindings. Ownership and eligibility refusals occurred while awaiting the activation call, with only billing effects recorded; no activation or reporting effect followed. Shell refusals were native `SecurityException`s, including inside a fetched function. The container task failed during definition with no runnable provider; unknown version failed during definition with a `FileNotFoundException` and recorded catalog 404.
 
