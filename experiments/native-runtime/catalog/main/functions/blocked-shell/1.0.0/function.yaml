@@ -1,0 +1,6 @@
+do:
+  - blocked:
+      run:
+        shell:
+          command: aapi-harmless-nonexistent-sentinel
+        return: code

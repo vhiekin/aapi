@@ -1,0 +1,350 @@
+{
+  "runtimeVersion": "7.35.4.Final",
+  "mavenVersion": "3.9.11",
+  "jdkVersion": "openjdk version \"17.0.21\" 2026-10-20",
+  "jars": [
+    {
+      "groupId": "com.cronutils",
+      "artifactId": "cron-utils",
+      "version": "9.2.1",
+      "file": "cron-utils-9.2.1.jar",
+      "sha256": "02af0e8b2fe93c9fa6eecf97b53b39faae14c5b996356edb132e9fe620013744"
+    },
+    {
+      "groupId": "com.ethlo.time",
+      "artifactId": "itu",
+      "version": "1.14.0",
+      "file": "itu-1.14.0.jar",
+      "sha256": "5cf40ab0cc77828ab2b875b1f3ecd71c8295d7721933476abc2e08fddcea164a"
+    },
+    {
+      "groupId": "com.fasterxml",
+      "artifactId": "classmate",
+      "version": "1.7.1",
+      "file": "classmate-1.7.1.jar",
+      "sha256": "cc3299e5df4fc24180e69477c890d07d38db79dd2decc0ef20e74a986897c0a1"
+    },
+    {
+      "groupId": "com.fasterxml.jackson.core",
+      "artifactId": "jackson-annotations",
+      "version": "2.23",
+      "file": "jackson-annotations-2.23.jar",
+      "sha256": "e5b60c3088e0887b290ff9226394354589a1dad583743944b7f5538661056b4c"
+    },
+    {
+      "groupId": "com.fasterxml.jackson.core",
+      "artifactId": "jackson-core",
+      "version": "2.23.0",
+      "file": "jackson-core-2.23.0.jar",
+      "sha256": "449798beb4c4ec26de9cc25b39ca2198036883fb905ca968cbef7136d19a25d9"
+    },
+    {
+      "groupId": "com.fasterxml.jackson.core",
+      "artifactId": "jackson-databind",
+      "version": "2.23.0",
+      "file": "jackson-databind-2.23.0.jar",
+      "sha256": "abd1edd2736c764da03fe6cb7a9de70d48dd0a198aed131604c564bff62f9cc1"
+    },
+    {
+      "groupId": "com.fasterxml.jackson.dataformat",
+      "artifactId": "jackson-dataformat-yaml",
+      "version": "2.23.0",
+      "file": "jackson-dataformat-yaml-2.23.0.jar",
+      "sha256": "971bce7e65b63c7f78965c29aa35370143f01e21a420d02bb3cde32069360689"
+    },
+    {
+      "groupId": "com.fasterxml.jackson.datatype",
+      "artifactId": "jackson-datatype-jsr310",
+      "version": "2.23.0",
+      "file": "jackson-datatype-jsr310-2.23.0.jar",
+      "sha256": "f348f4de49644afa0ccbff6b018709a5f0f1468c76852e4217051890a0b8528c"
+    },
+    {
+      "groupId": "com.fasterxml.jackson.module",
+      "artifactId": "jackson-module-jakarta-xmlbind-annotations",
+      "version": "2.23.0",
+      "file": "jackson-module-jakarta-xmlbind-annotations-2.23.0.jar",
+      "sha256": "d44943e1d2b2399e362fa6ace4c263ef959b6d8bd91a871da9e860cf85fa1504"
+    },
+    {
+      "groupId": "com.github.f4b6a3",
+      "artifactId": "ulid-creator",
+      "version": "5.2.4",
+      "file": "ulid-creator-5.2.4.jar",
+      "sha256": "fcafd40919d417ad42aa03e26442f359f429da3939ea629f6a985847efcc1433"
+    },
+    {
+      "groupId": "com.networknt",
+      "artifactId": "json-schema-validator",
+      "version": "2.0.8",
+      "file": "json-schema-validator-2.0.8.jar",
+      "sha256": "26602201cca8a0bc03cd893dad5a719d5218ab3c0b7cda5a68bfbbaa55b6711a"
+    },
+    {
+      "groupId": "io.cloudevents",
+      "artifactId": "cloudevents-api",
+      "version": "5.1.0",
+      "file": "cloudevents-api-5.1.0.jar",
+      "sha256": "e6f480326218c7842d705cd98a91cdee3e137152e8cf4dc1789f8dd5bdf624fd"
+    },
+    {
+      "groupId": "io.cloudevents",
+      "artifactId": "cloudevents-core",
+      "version": "5.1.0",
+      "file": "cloudevents-core-5.1.0.jar",
+      "sha256": "8125de796070e13e7aaf46de5d47ff35d5a891e2a7ae789a58579a44f989b6bb"
+    },
+    {
+      "groupId": "io.cloudevents",
+      "artifactId": "cloudevents-json-jackson",
+      "version": "5.1.0",
+      "file": "cloudevents-json-jackson-5.1.0.jar",
+      "sha256": "f2de4bfb967e15659b2947ba691527cde3912cc0d7452368a8eb1c79f9e3da8a"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-annotations",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-annotations-7.35.4.Final.jar",
+      "sha256": "6338daf8f3edfffa57d6de636ebfbe1df3b8b5be473bc134edaed9d0e616bb5f"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-api",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-api-7.35.4.Final.jar",
+      "sha256": "e4399d01d6095e0f9a860233cc2009d86a7845b6e21349014846e847e64127e0"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-core",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-core-7.35.4.Final.jar",
+      "sha256": "eefaa6a97d5b81bcab0d033ba0d084f359d07d2e486862ac178655cfccb1c55f"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-cron",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-cron-7.35.4.Final.jar",
+      "sha256": "36a890356ccad12af1cea48a18d6439ebd36ed453a77d6f9fb78b45090a1ec3b"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-function",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-function-7.35.4.Final.jar",
+      "sha256": "6f47df0e10c5b62dd30fbb0126fad06269d12b052926abfbb5a77aedbb19da5b"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-http",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-http-7.35.4.Final.jar",
+      "sha256": "ae15618c3fd52fa7b6c05c233bb7a37371db0bfedaf0017d8df55ba830f46f61"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-jackson",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-jackson-7.35.4.Final.jar",
+      "sha256": "ef720def9ef91d759a372e84b2d111f63edb695131f565fb9f04281875b4351f"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-jq",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-jq-7.35.4.Final.jar",
+      "sha256": "558dfe6d8d085905a09610354848b228a79244c91534ac1d415f2e5b1ac09cab"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-json",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-json-7.35.4.Final.jar",
+      "sha256": "8de26b095b37bdedc79a7b921b9ac96108ecd5649a91502dfe1be5c292e594cf"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-lifecycle-events",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-lifecycle-events-7.35.4.Final.jar",
+      "sha256": "8ee16150c0cb1874256f9a3b93afcadf5c04c1642e880c9c6500a1576e3790e1"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-model",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-model-7.35.4.Final.jar",
+      "sha256": "42396f9b10d31a6395aa0a6e3e38369fec9e3c2fddd8b576db358efd241d0895"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-template-resolver",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-template-resolver-7.35.4.Final.jar",
+      "sha256": "9a5f85f32d268bf16bae5a5338a65bde80b3342625533f4b134aaaba7c77200e"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-impl-validation",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-impl-validation-7.35.4.Final.jar",
+      "sha256": "183fd9037102daae4c5f8ef3af2bbe533558ea6165358d16846049708918bf3a"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-serialization",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-serialization-7.35.4.Final.jar",
+      "sha256": "ea6c136284dea703779074b8f95be25996de7fa7e33c58dd285754a6c1a757fd"
+    },
+    {
+      "groupId": "io.serverlessworkflow",
+      "artifactId": "serverlessworkflow-types",
+      "version": "7.35.4.Final",
+      "file": "serverlessworkflow-types-7.35.4.Final.jar",
+      "sha256": "67ab4aa1ca515f4e9de14952f7ba4daea44e9b058ff89b97c72e3e2dd30f206a"
+    },
+    {
+      "groupId": "jakarta.activation",
+      "artifactId": "jakarta.activation-api",
+      "version": "2.1.4",
+      "file": "jakarta.activation-api-2.1.4.jar",
+      "sha256": "c9db52100ce6c8aac95cc39075f95720d2e561b11f8051b81c121ad4effd7004"
+    },
+    {
+      "groupId": "jakarta.annotation",
+      "artifactId": "jakarta.annotation-api",
+      "version": "3.0.0",
+      "file": "jakarta.annotation-api-3.0.0.jar",
+      "sha256": "b01f55552284cfb149411e64eabca75e942d26d2e1786b32914250e4330afaa2"
+    },
+    {
+      "groupId": "jakarta.el",
+      "artifactId": "jakarta.el-api",
+      "version": "6.0.1",
+      "file": "jakarta.el-api-6.0.1.jar",
+      "sha256": "7e84b5bed49de32b79cc5e85d90b6f5adb1a953ac67283adbb41c1e297f9c605"
+    },
+    {
+      "groupId": "jakarta.inject",
+      "artifactId": "jakarta.inject-api",
+      "version": "2.0.1",
+      "file": "jakarta.inject-api-2.0.1.jar",
+      "sha256": "f7dc98062fccf14126abb751b64fab12c312566e8cbdc8483598bffcea93af7c"
+    },
+    {
+      "groupId": "jakarta.validation",
+      "artifactId": "jakarta.validation-api",
+      "version": "3.1.1",
+      "file": "jakarta.validation-api-3.1.1.jar",
+      "sha256": "63ce00156388c365f3ac1be71fcfaf114682fc0c452020b5df6e7ec236e142ab"
+    },
+    {
+      "groupId": "jakarta.ws.rs",
+      "artifactId": "jakarta.ws.rs-api",
+      "version": "4.0.0",
+      "file": "jakarta.ws.rs-api-4.0.0.jar",
+      "sha256": "6368b126cbcf34e694bb9ba5b9fe3e5040b7acea7ce622e636d698bb085fd2a6"
+    },
+    {
+      "groupId": "jakarta.xml.bind",
+      "artifactId": "jakarta.xml.bind-api",
+      "version": "4.0.5",
+      "file": "jakarta.xml.bind-api-4.0.5.jar",
+      "sha256": "5e489b6c874c4119e003ff1403db523ee3a8959ec499f3de29e77245efccf216"
+    },
+    {
+      "groupId": "net.thisptr",
+      "artifactId": "jackson-jq",
+      "version": "1.6.5",
+      "file": "jackson-jq-1.6.5.jar",
+      "sha256": "c5878a4b1115269855858621c2471bc9b3f7679bca9340e6a5f1bb4ad659a07c"
+    },
+    {
+      "groupId": "org.glassfish.expressly",
+      "artifactId": "expressly",
+      "version": "6.0.0",
+      "file": "expressly-6.0.0.jar",
+      "sha256": "86ee67c7040278bac5204b571f738b8b859f014ceb5f896bd935bacbdaf33cb9"
+    },
+    {
+      "groupId": "org.glassfish.hk2",
+      "artifactId": "osgi-resource-locator",
+      "version": "3.0.0",
+      "file": "osgi-resource-locator-3.0.0.jar",
+      "sha256": "a1866ccfddaa29f18da5d39df662894ab2dd9902994a5000e7644f6cc1e37e55"
+    },
+    {
+      "groupId": "org.glassfish.jersey.core",
+      "artifactId": "jersey-client",
+      "version": "4.0.3",
+      "file": "jersey-client-4.0.3.jar",
+      "sha256": "4fe1aa250b9f0f708e5f5641468d50cd773776d236926f2a51d3ece27d8d6ffc"
+    },
+    {
+      "groupId": "org.glassfish.jersey.core",
+      "artifactId": "jersey-common",
+      "version": "4.0.3",
+      "file": "jersey-common-4.0.3.jar",
+      "sha256": "6480837fa63edd71141aa35e4d8d8d15ccd49234246ce0d3ef3eedb9e8cb1c03"
+    },
+    {
+      "groupId": "org.glassfish.jersey.ext",
+      "artifactId": "jersey-entity-filtering",
+      "version": "4.0.3",
+      "file": "jersey-entity-filtering-4.0.3.jar",
+      "sha256": "64503ee18c51f660d456e26e78e6cb113e06c6320e49347ba5722746862c8f1c"
+    },
+    {
+      "groupId": "org.glassfish.jersey.media",
+      "artifactId": "jersey-media-json-jackson",
+      "version": "4.0.3",
+      "file": "jersey-media-json-jackson-4.0.3.jar",
+      "sha256": "cd84f283624bfaf35e354353162d5c701a297fb59aa78e5e2b347dfd09c20860"
+    },
+    {
+      "groupId": "org.hibernate.validator",
+      "artifactId": "hibernate-validator",
+      "version": "9.1.6.Final",
+      "file": "hibernate-validator-9.1.6.Final.jar",
+      "sha256": "cfd28c001c726db7a4ff68c25c8cfe4cf85af067cb068fca539c33d492339ff6"
+    },
+    {
+      "groupId": "org.jboss.logging",
+      "artifactId": "jboss-logging",
+      "version": "3.6.3.Final",
+      "file": "jboss-logging-3.6.3.Final.jar",
+      "sha256": "7c12ee575508f81e22b1db9334b969d0ec54ef0fd1dcba24eeab1a44235fc366"
+    },
+    {
+      "groupId": "org.jruby.jcodings",
+      "artifactId": "jcodings",
+      "version": "1.0.63",
+      "file": "jcodings-1.0.63.jar",
+      "sha256": "ef11e1741a65160c5619cd2c3c79c40ee0affda847062f012616034b9d10e719"
+    },
+    {
+      "groupId": "org.jruby.joni",
+      "artifactId": "joni",
+      "version": "2.2.6",
+      "file": "joni-2.2.6.jar",
+      "sha256": "fb33f60ab43e38653317bbf41a1fec89cbee270c48e53b0b56d1165c00de0e07"
+    },
+    {
+      "groupId": "org.slf4j",
+      "artifactId": "slf4j-api",
+      "version": "2.0.20",
+      "file": "slf4j-api-2.0.20.jar",
+      "sha256": "7e1446499b359675d8aabe6af2de86b85e72ae8a2a932c0b40d0e5ba57097439"
+    },
+    {
+      "groupId": "org.yaml",
+      "artifactId": "snakeyaml",
+      "version": "2.5",
+      "file": "snakeyaml-2.5.jar",
+      "sha256": "e6682acf1ace77508ef13649cbf4f8d09d2cf5457bdb61d25ffb6ac0233d78dd"
+    }
+  ]
+}

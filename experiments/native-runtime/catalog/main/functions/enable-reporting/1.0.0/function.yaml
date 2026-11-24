@@ -1,0 +1,10 @@
+call: http
+with:
+  method: put
+  endpoint: '${ $workflow.input.businessBase + "/customers/" + .customerId + "/reporting" }'
+  headers:
+    Content-Type: application/json
+  body:
+    serviceId: '${ .serviceId }'
+    enabled: true
+  output: content

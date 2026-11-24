@@ -43,3 +43,7 @@ CloudFormation's `AWSTemplateFormatVersion: 2010-09-09` does not pin every provi
 ## Existing visual evidence
 
 The phase-grid SVG and three Mermaid diagrams are unchanged by this example-checking addition. Their earlier AI-assisted static rendering/image inspections remain the evidence for those exact assets. They are not a browser check of GitHub's page layout or an independent human expert assessment. No private review material is required to run the tracked checks.
+
+## Separate native runtime experiment
+
+The [native catalog/runtime experiment](experiments/native-runtime/README.md) declares a separate Linux build/test-host venue with JDK 17 and a localhost mock; it does not run on the author workstation. Its exact dependency-preparation and bounded Java commands are documented before execution. Author run: nine expectations met, with the owned-loopback unapproved endpoint explicitly **accepted** by the default runtime. Results and exact limits are in the experiment; independent rerun is pending. The earlier offline checks above are not runtime proof. No community response or main publication is authorized by a test result alone.

@@ -1,0 +1,366 @@
+{
+  "runtime" : "io.serverlessworkflow:7.35.4.Final",
+  "startedAtUtc" : "2026-11-24T20:39:49.702046250Z",
+  "completedAtUtc" : "2026-11-24T20:39:51.240348837Z",
+  "javaVersion" : "17.0.21",
+  "catalogDigests" : {
+    "/catalog/main/functions/activate-service/1.0.0/function.yaml" : "e2b32d2a164a15e48cbab6808925fd7b8669b6b50e5faa2957cbd91c2ca27f28",
+    "/catalog/main/functions/blocked-shell/1.0.0/function.yaml" : "befaf34a69ddfa51699969ad06782da49236941b18c45bcf23510b62171804b8",
+    "/catalog/main/functions/configure-billing/1.0.0/function.yaml" : "d9760fb83b32aff4d85f9c62b3b673e568a98dc6c004e09fedad06a5b6e60f0e",
+    "/catalog/main/functions/enable-reporting/1.0.0/function.yaml" : "39e4f360930711c4ccd8fd819bd6d2d5ba83a765e57085eb06899bd86e7aab50",
+    "/catalog/main/functions/unapproved-endpoint/1.0.0/function.yaml" : "9838bf0fecbc65ca9a3dadf6a5d12d89db1f091da7a2d4735f42021b1cad1340",
+    "/catalog/main/functions/with-reporting/1.0.0/function.yaml" : "b382da8ba845dc94b866875af4071b14a1990f2926766829bb7b4d11e4ac73ee",
+    "/catalog/main/functions/without-reporting/1.0.0/function.yaml" : "8feb4285f471bb46ac22790e88643a95aa60e76060e45b6336c21e01e34c3e58"
+  },
+  "cases" : [ {
+    "case" : "with-reporting",
+    "classification" : "native catalog/runtime execution",
+    "expected" : {
+      "success" : true,
+      "calls" : [ "configureBilling", "activateService", "enableReporting" ],
+      "effects" : [ "configureBilling", "activateService", "enableReporting" ],
+      "errorContains" : ""
+    },
+    "nativeAllowedCommands" : [ ],
+    "runnableProviders" : [ "io.serverlessworkflow.impl.executors.RunScriptExecutorBuilder", "io.serverlessworkflow.impl.executors.RunShellExecutorBuilder", "io.serverlessworkflow.impl.executors.RunWorkflowExecutorBuilder" ],
+    "actual" : {
+      "success" : true,
+      "phase" : "complete",
+      "output" : {
+        "reportingEnabled" : true
+      },
+      "error" : "",
+      "calls" : [ {
+        "operation" : "configureBilling",
+        "body" : {
+          "cycle" : "monthly"
+        },
+        "status" : 200,
+        "effectApplied" : true
+      }, {
+        "operation" : "activateService",
+        "body" : {
+          "package" : "standard",
+          "billingRecordId" : "billing-example"
+        },
+        "status" : 200,
+        "effectApplied" : true
+      }, {
+        "operation" : "enableReporting",
+        "body" : {
+          "serviceId" : "service-example",
+          "enabled" : true
+        },
+        "status" : 200,
+        "effectApplied" : true
+      } ],
+      "effects" : [ "configureBilling", "activateService", "enableReporting" ],
+      "unapprovedEndpointCaptureHits" : 0
+    },
+    "catalogFetches" : [ {
+      "path" : "/catalog/main/functions/with-reporting/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "b382da8ba845dc94b866875af4071b14a1990f2926766829bb7b4d11e4ac73ee"
+    }, {
+      "path" : "/catalog/main/functions/configure-billing/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "d9760fb83b32aff4d85f9c62b3b673e568a98dc6c004e09fedad06a5b6e60f0e"
+    }, {
+      "path" : "/catalog/main/functions/activate-service/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "e2b32d2a164a15e48cbab6808925fd7b8669b6b50e5faa2957cbd91c2ca27f28"
+    }, {
+      "path" : "/catalog/main/functions/enable-reporting/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "39e4f360930711c4ccd8fd819bd6d2d5ba83a765e57085eb06899bd86e7aab50"
+    } ],
+    "passed" : true
+  }, {
+    "case" : "without-reporting",
+    "classification" : "native catalog/runtime execution",
+    "expected" : {
+      "success" : true,
+      "calls" : [ "configureBilling", "activateService" ],
+      "effects" : [ "configureBilling", "activateService" ],
+      "errorContains" : ""
+    },
+    "nativeAllowedCommands" : [ ],
+    "runnableProviders" : [ "io.serverlessworkflow.impl.executors.RunScriptExecutorBuilder", "io.serverlessworkflow.impl.executors.RunShellExecutorBuilder", "io.serverlessworkflow.impl.executors.RunWorkflowExecutorBuilder" ],
+    "actual" : {
+      "success" : true,
+      "phase" : "complete",
+      "output" : {
+        "customerId" : "customer-example",
+        "serviceId" : "service-example"
+      },
+      "error" : "",
+      "calls" : [ {
+        "operation" : "configureBilling",
+        "body" : {
+          "cycle" : "monthly"
+        },
+        "status" : 200,
+        "effectApplied" : true
+      }, {
+        "operation" : "activateService",
+        "body" : {
+          "package" : "standard",
+          "billingRecordId" : "billing-example"
+        },
+        "status" : 200,
+        "effectApplied" : true
+      } ],
+      "effects" : [ "configureBilling", "activateService" ],
+      "unapprovedEndpointCaptureHits" : 0
+    },
+    "catalogFetches" : [ {
+      "path" : "/catalog/main/functions/without-reporting/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "8feb4285f471bb46ac22790e88643a95aa60e76060e45b6336c21e01e34c3e58"
+    }, {
+      "path" : "/catalog/main/functions/configure-billing/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "d9760fb83b32aff4d85f9c62b3b673e568a98dc6c004e09fedad06a5b6e60f0e"
+    }, {
+      "path" : "/catalog/main/functions/activate-service/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "e2b32d2a164a15e48cbab6808925fd7b8669b6b50e5faa2957cbd91c2ca27f28"
+    } ],
+    "passed" : true
+  }, {
+    "case" : "wrong-owner",
+    "classification" : "mock application ownership guard",
+    "expected" : {
+      "success" : false,
+      "calls" : [ "configureBilling", "activateService" ],
+      "effects" : [ "configureBilling" ],
+      "errorContains" : ""
+    },
+    "nativeAllowedCommands" : [ ],
+    "runnableProviders" : [ "io.serverlessworkflow.impl.executors.RunScriptExecutorBuilder", "io.serverlessworkflow.impl.executors.RunShellExecutorBuilder", "io.serverlessworkflow.impl.executors.RunWorkflowExecutorBuilder" ],
+    "expectedGuardReason" : "billing-owner-mismatch",
+    "actual" : {
+      "success" : false,
+      "phase" : "await",
+      "output" : null,
+      "error" : "ExecutionException: io.serverlessworkflow.impl.WorkflowException: WorkflowError[type=https://serverlessworkflow.io/spec/1.0.0/errors/communication, status=409, instance=do/0/selected/do/1/activation, title=Conflict, detail={error=billing-owner-mismatch}] | WorkflowException: WorkflowError[type=https://serverlessworkflow.io/spec/1.0.0/errors/communication, status=409, instance=do/0/selected/do/1/activation, title=Conflict, detail={error=billing-owner-mismatch}]",
+      "calls" : [ {
+        "operation" : "configureBilling",
+        "body" : {
+          "cycle" : "monthly"
+        },
+        "status" : 200,
+        "effectApplied" : true
+      }, {
+        "operation" : "activateService",
+        "body" : {
+          "package" : "standard",
+          "billingRecordId" : "billing-other"
+        },
+        "status" : 409,
+        "effectApplied" : false,
+        "reason" : "billing-owner-mismatch"
+      } ],
+      "effects" : [ "configureBilling" ],
+      "unapprovedEndpointCaptureHits" : 0
+    },
+    "catalogFetches" : [ {
+      "path" : "/catalog/main/functions/with-reporting/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "b382da8ba845dc94b866875af4071b14a1990f2926766829bb7b4d11e4ac73ee"
+    }, {
+      "path" : "/catalog/main/functions/configure-billing/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "d9760fb83b32aff4d85f9c62b3b673e568a98dc6c004e09fedad06a5b6e60f0e"
+    }, {
+      "path" : "/catalog/main/functions/activate-service/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "e2b32d2a164a15e48cbab6808925fd7b8669b6b50e5faa2957cbd91c2ca27f28"
+    }, {
+      "path" : "/catalog/main/functions/enable-reporting/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "39e4f360930711c4ccd8fd819bd6d2d5ba83a765e57085eb06899bd86e7aab50"
+    } ],
+    "passed" : true
+  }, {
+    "case" : "eligibility-drift",
+    "classification" : "mock application fresh-state guard",
+    "expected" : {
+      "success" : false,
+      "calls" : [ "configureBilling", "activateService" ],
+      "effects" : [ "configureBilling" ],
+      "errorContains" : ""
+    },
+    "nativeAllowedCommands" : [ ],
+    "runnableProviders" : [ "io.serverlessworkflow.impl.executors.RunScriptExecutorBuilder", "io.serverlessworkflow.impl.executors.RunShellExecutorBuilder", "io.serverlessworkflow.impl.executors.RunWorkflowExecutorBuilder" ],
+    "expectedGuardReason" : "customer-ineligible",
+    "actual" : {
+      "success" : false,
+      "phase" : "await",
+      "output" : null,
+      "error" : "ExecutionException: io.serverlessworkflow.impl.WorkflowException: WorkflowError[type=https://serverlessworkflow.io/spec/1.0.0/errors/communication, status=409, instance=do/0/selected/do/1/activation, title=Conflict, detail={error=customer-ineligible}] | WorkflowException: WorkflowError[type=https://serverlessworkflow.io/spec/1.0.0/errors/communication, status=409, instance=do/0/selected/do/1/activation, title=Conflict, detail={error=customer-ineligible}]",
+      "calls" : [ {
+        "operation" : "configureBilling",
+        "body" : {
+          "cycle" : "monthly"
+        },
+        "status" : 200,
+        "effectApplied" : true
+      }, {
+        "operation" : "activateService",
+        "body" : {
+          "package" : "standard",
+          "billingRecordId" : "billing-example"
+        },
+        "status" : 409,
+        "effectApplied" : false,
+        "reason" : "customer-ineligible"
+      } ],
+      "effects" : [ "configureBilling" ],
+      "unapprovedEndpointCaptureHits" : 0
+    },
+    "catalogFetches" : [ {
+      "path" : "/catalog/main/functions/with-reporting/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "b382da8ba845dc94b866875af4071b14a1990f2926766829bb7b4d11e4ac73ee"
+    }, {
+      "path" : "/catalog/main/functions/configure-billing/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "d9760fb83b32aff4d85f9c62b3b673e568a98dc6c004e09fedad06a5b6e60f0e"
+    }, {
+      "path" : "/catalog/main/functions/activate-service/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "e2b32d2a164a15e48cbab6808925fd7b8669b6b50e5faa2957cbd91c2ca27f28"
+    }, {
+      "path" : "/catalog/main/functions/enable-reporting/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "39e4f360930711c4ccd8fd819bd6d2d5ba83a765e57085eb06899bd86e7aab50"
+    } ],
+    "passed" : true
+  }, {
+    "case" : "unapproved-endpoint",
+    "classification" : "observed native default: endpoint not denied; owned localhost capture only",
+    "expected" : {
+      "success" : true,
+      "calls" : [ ],
+      "effects" : [ ],
+      "errorContains" : ""
+    },
+    "nativeAllowedCommands" : [ ],
+    "runnableProviders" : [ "io.serverlessworkflow.impl.executors.RunScriptExecutorBuilder", "io.serverlessworkflow.impl.executors.RunShellExecutorBuilder", "io.serverlessworkflow.impl.executors.RunWorkflowExecutorBuilder" ],
+    "actual" : {
+      "success" : true,
+      "phase" : "complete",
+      "output" : {
+        "captured" : true
+      },
+      "error" : "",
+      "calls" : [ ],
+      "effects" : [ ],
+      "unapprovedEndpointCaptureHits" : 1
+    },
+    "catalogFetches" : [ {
+      "path" : "/catalog/main/functions/unapproved-endpoint/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "9838bf0fecbc65ca9a3dadf6a5d12d89db1f091da7a2d4735f42021b1cad1340"
+    } ],
+    "passed" : true
+  }, {
+    "case" : "top-shell",
+    "classification" : "native empty command allowlist",
+    "expected" : {
+      "success" : false,
+      "calls" : [ ],
+      "effects" : [ ],
+      "errorContains" : "not allowed"
+    },
+    "nativeAllowedCommands" : [ ],
+    "runnableProviders" : [ "io.serverlessworkflow.impl.executors.RunScriptExecutorBuilder", "io.serverlessworkflow.impl.executors.RunShellExecutorBuilder", "io.serverlessworkflow.impl.executors.RunWorkflowExecutorBuilder" ],
+    "actual" : {
+      "success" : false,
+      "phase" : "await",
+      "output" : null,
+      "error" : "ExecutionException: java.lang.SecurityException: Command aapi-harmless-nonexistent-sentinel is not allowed. Please verify the set of allowed commands passed to the application | SecurityException: Command aapi-harmless-nonexistent-sentinel is not allowed. Please verify the set of allowed commands passed to the application",
+      "calls" : [ ],
+      "effects" : [ ],
+      "unapprovedEndpointCaptureHits" : 0
+    },
+    "catalogFetches" : [ ],
+    "passed" : true
+  }, {
+    "case" : "top-container",
+    "classification" : "capability omitted: no container module",
+    "expected" : {
+      "success" : false,
+      "calls" : [ ],
+      "effects" : [ ],
+      "errorContains" : "No runnable found"
+    },
+    "nativeAllowedCommands" : [ ],
+    "runnableProviders" : [ "io.serverlessworkflow.impl.executors.RunScriptExecutorBuilder", "io.serverlessworkflow.impl.executors.RunShellExecutorBuilder", "io.serverlessworkflow.impl.executors.RunWorkflowExecutorBuilder" ],
+    "actual" : {
+      "success" : false,
+      "phase" : "definition",
+      "output" : null,
+      "error" : "UnsupportedOperationException: No runnable found for operation class io.serverlessworkflow.api.types.RunContainer",
+      "calls" : [ ],
+      "effects" : [ ],
+      "unapprovedEndpointCaptureHits" : 0
+    },
+    "catalogFetches" : [ ],
+    "passed" : true
+  }, {
+    "case" : "nested-shell",
+    "classification" : "native command policy inside catalog function",
+    "expected" : {
+      "success" : false,
+      "calls" : [ ],
+      "effects" : [ ],
+      "errorContains" : "not allowed"
+    },
+    "nativeAllowedCommands" : [ ],
+    "runnableProviders" : [ "io.serverlessworkflow.impl.executors.RunScriptExecutorBuilder", "io.serverlessworkflow.impl.executors.RunShellExecutorBuilder", "io.serverlessworkflow.impl.executors.RunWorkflowExecutorBuilder" ],
+    "actual" : {
+      "success" : false,
+      "phase" : "await",
+      "output" : null,
+      "error" : "ExecutionException: java.lang.SecurityException: Command aapi-harmless-nonexistent-sentinel is not allowed. Please verify the set of allowed commands passed to the application | SecurityException: Command aapi-harmless-nonexistent-sentinel is not allowed. Please verify the set of allowed commands passed to the application",
+      "calls" : [ ],
+      "effects" : [ ],
+      "unapprovedEndpointCaptureHits" : 0
+    },
+    "catalogFetches" : [ {
+      "path" : "/catalog/main/functions/blocked-shell/1.0.0/function.yaml",
+      "status" : 200,
+      "sha256" : "befaf34a69ddfa51699969ad06782da49236941b18c45bcf23510b62171804b8"
+    } ],
+    "passed" : true
+  }, {
+    "case" : "unknown-version",
+    "classification" : "native catalog lookup refusal",
+    "expected" : {
+      "success" : false,
+      "calls" : [ ],
+      "effects" : [ ],
+      "errorContains" : "FileNotFoundException"
+    },
+    "nativeAllowedCommands" : [ ],
+    "runnableProviders" : [ "io.serverlessworkflow.impl.executors.RunScriptExecutorBuilder", "io.serverlessworkflow.impl.executors.RunShellExecutorBuilder", "io.serverlessworkflow.impl.executors.RunWorkflowExecutorBuilder" ],
+    "actual" : {
+      "success" : false,
+      "phase" : "definition",
+      "output" : null,
+      "error" : "UncheckedIOException: java.io.FileNotFoundException: http://127.0.0.1:35401/catalog/main/functions/with-reporting/9.9.9/function.yaml | FileNotFoundException: http://127.0.0.1:35401/catalog/main/functions/with-reporting/9.9.9/function.yaml",
+      "calls" : [ ],
+      "effects" : [ ],
+      "unapprovedEndpointCaptureHits" : 0
+    },
+    "catalogFetches" : [ {
+      "path" : "/catalog/main/functions/with-reporting/9.9.9/function.yaml",
+      "status" : 404,
+      "sha256" : null
+    } ],
+    "passed" : true
+  } ],
+  "limitations" : [ "Localhost mock execution only; no real business, cloud, LLM or human approval ceremony.", "Ownership and eligibility are mock application guards, not a native runtime authorization profile.", "Container omission is not a sandbox for a runtime where that module is enabled.", "The native default called one owned localhost endpoint outside the fictional application allowlist; this is not an external-network or universal policy test.", "Catalog server serves frozen fixture bytes; production catalog trust and mutable-version policy are not implemented." ]
+}

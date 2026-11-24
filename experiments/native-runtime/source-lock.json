@@ -1,0 +1,27 @@
+{
+  "repository": "https://github.com/open-workflow-specification/sdk-java",
+  "tag": "7.35.4.Final",
+  "commit": "8e31544f88d7d4d290deef186bef979c5118a6aa",
+  "inspectedSources": [
+    {
+      "path": "impl/core/src/main/java/io/serverlessworkflow/impl/executors/RunShellExecutor.java",
+      "sha256": "56c7f2307d26f934072c0c8e8fdee8ef97c0d8f9e977396e918797d34d786d07",
+      "url": "https://raw.githubusercontent.com/open-workflow-specification/sdk-java/7.35.4.Final/impl/core/src/main/java/io/serverlessworkflow/impl/executors/RunShellExecutor.java"
+    },
+    {
+      "path": "impl/core/src/main/java/io/serverlessworkflow/impl/executors/RunTaskExecutor.java",
+      "sha256": "e6b54481d053af3cd7a161cbe8dea795acf5e50d08b2f6fdeb998dec8c0fdae4",
+      "url": "https://raw.githubusercontent.com/open-workflow-specification/sdk-java/7.35.4.Final/impl/core/src/main/java/io/serverlessworkflow/impl/executors/RunTaskExecutor.java"
+    },
+    {
+      "path": "impl/core/src/main/java/io/serverlessworkflow/impl/executors/CallFunctionExecutorBuilder.java",
+      "sha256": "d9cf8e0b730ccc6a53b35277199703d9bf7524c4d0dd6827b2105055ba713e92",
+      "url": "https://raw.githubusercontent.com/open-workflow-specification/sdk-java/7.35.4.Final/impl/core/src/main/java/io/serverlessworkflow/impl/executors/CallFunctionExecutorBuilder.java"
+    },
+    {
+      "path": "impl/core/src/main/java/io/serverlessworkflow/impl/WorkflowApplication.java",
+      "sha256": "39ae25502622e43ddef11234bb98ee21a53dbbeb58f98ce032fc98eb284292d5",
+      "url": "https://raw.githubusercontent.com/open-workflow-specification/sdk-java/7.35.4.Final/impl/core/src/main/java/io/serverlessworkflow/impl/WorkflowApplication.java"
+    }
+  ]
+}
