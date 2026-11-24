@@ -18,16 +18,18 @@ The authoring agent has no apply or domain-mutation permissions. It cannot grant
 
 - [Proposal and candidate semantics](PROPOSAL.md)
 - [Infrastructure example: native CloudFormation](examples/cloudformation/README.md)
-- [Customer activation: native Arazzo plus an Open Workflow mapping](examples/customer-service/README.md)
+- [Reproducible customer activation: trusted methods, Arazzo and Open Workflow](examples/customer-service/README.md)
 - [Prior art, overlap and compatibility](PRIOR_ART.md)
 - [Questions for maintainers and implementers](FEEDBACK.md)
 - [What has and has not been validated](VALIDATION.md)
 - [Contributing](CONTRIBUTING.md)
 
+The [customer experiment](examples/customer-service/README.md) includes two pinned methods, constrained author submissions, controlled state/ownership negatives and an offline checker. It demonstrates method selection and parameter substitution, not arbitrary composition. See [exact reproduction commands](VALIDATION.md).
+
 The examples are fictional and illustrative. No application endpoints, credentials, deploy commands or runtime are supplied. Native schemas can establish structural validity; they do not establish authorization or prove application effects.
 
 ## License and authorship
 
-Original documents and examples are available under the [MIT License](LICENSE). Linked specifications retain their respective licenses.
+Original documents and examples are available under the [MIT License](LICENSE). Vendored upstream schemas are Apache-2.0 with [notices](schemas/README.md); linked specifications retain their respective licenses.
 
 This draft was prepared with AI assistance for research, writing and static checks. Maintainers remain responsible for its claims. No independent human review or standards-body endorsement is claimed.

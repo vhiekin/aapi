@@ -1,37 +1,45 @@
-# Validation scope
+# Reproduce the bounded example checks
 
-This repository contains documents and illustrative native declarations, not a runtime or a new validator. Checks are static and do not call the fictional API, CloudFormation, a planner or an execution engine.
+The local artifact-check venue uses Python 3.10+ with pinned dependencies. No service, account, secret, cloud permission, model or workflow runtime is needed. The checker reads only tracked examples/schemas and writes no files. It does not use the network.
+
+## Exact commands
+
+From a fresh checkout, install the pinned dependencies once (this installation may use the package index):
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install --no-cache-dir -r requirements-checks.txt
+.venv/bin/python tools/check_examples.py
+```
+
+**The single verification command is `.venv/bin/python tools/check_examples.py`.** Once installed, it runs offline. An existing interpreter with the exact versions may instead use `python3 tools/check_examples.py`. The checker verifies installed versions and vendored schema checksums. A mismatch or unexpected positive/negative result exits nonzero. The unconditional typing-extensions pin covers referencing’s dependency on Python 3.10–3.12 and is checked on every supported interpreter.
+
+[requirements-checks.txt](requirements-checks.txt) pins all seven check dependencies. [schemas/manifest.json](schemas/manifest.json) pins official schema bytes/source URLs; [upstream notices](schemas/README.md) identify licenses and offline reference closure. No hidden Git files, user-home inputs or downloaded schema cache is required.
 
 ## Declared checks
 
-- Parse every JSON example.
-- Validate the Arazzo examples against the official [Arazzo 1.0 schema, iteration 2025-10-15](https://spec.openapis.org/arazzo/1.0/schema/2025-10-15), applicable to patch version 1.0.1. Fetch the schema into memory only.
-- Check example workflow inputs and request/result shapes with the existing Python `jsonschema` library, resolving only the sample's known output types/fixtures.
-- Check operation IDs against the fictional OpenAPI document; check that step output references point to preceding steps in the valid workflow and fail in the intentionally invalid order.
-- Check CloudFormation references/dependency cycles statically and inspect native resource property names against official documentation.
-- Check relative document/file links and inspect public files for private infrastructure/source details, credentials and misleading maturity claims.
+- Parse JSON and validate both approved Arazzo 1.0.1 methods and both Open Workflow 1.0.1 declarations against the pinned official schemas.
+- Verify application-owned declaration/API hashes, method orders, allowed author fields and input schemas.
+- Resolve operation references, compare the two native formats' exact call/binding projection, and validate fixture request/response shapes against OpenAPI's schemas.
+- Evaluate actual controlled customer/record state at initial preflight and immediately before each hypothetical operation.
+- Compare seven derived positive/negative case decisions with [tracked expected outcomes](examples/customer-service/fixtures/cases.json): both methods, wrong-customer billing, initial ineligibility, eligibility drift, unknown method and author self-approval.
+- Detect the separately tracked forward-output-order negative and CloudFormation dependency-cycle negative; accept the positive resource graph.
+- Verify local Markdown links/anchors. Separately inspect changed public files for privacy and claim accuracy.
 
-These checks are deliberately narrower than proving a specification implementation. Arazzo's own [schema publication notes](https://spec.openapis.org/arazzo/) explain that its schema cannot catch every specification violation.
+## Results for this revision
 
-## Results
+Author run on 2026-11-24: `python3 tools/check_examples.py` passed all seven cases, both native formats for both methods, schema/definition hashes, call/binding projections, ordering/cycle negatives and 38 local links. The wrong-customer case was refused at the activation guard with `billing-owner-mismatch`; the drift case was refused before activation, while initial ineligibility was refused during preflight. Three independent AI-assisted persona re-reviews passed: application developer and senior architect at `fcc86e3bd207e21a70457a1e5bae9d0ef1e6946c`; open-source maintainer at `41e724461ae800ce7a4768dd3f2e42924efbe85f` after the conditional dependency pin was corrected. Each independently reran the bounded checker. Additional in-memory probes refused changed service ownership, lost eligibility before reporting, and a billing output with no authoritative record. These are simulated review perspectives, not assessments or endorsements by external human experts. The checks ran on Python 3.14.6 with all seven exact installed pins; Python 3.10–3.12 dependency coverage was checked from package metadata, not by running additional interpreters.
 
-Author static checks on 2026-11-24 passed:
+## What this does not prove
 
-- All six JSON files parsed.
-- Both Arazzo documents matched the pinned official schema. Schema SHA-256: `b8715bd824fffcb2accf5077977d37c9e7a15be60d785e7a3a51cf600fd46ad4`.
-- Concrete inputs and three operations' request/result fixture shapes matched their schemas; referenced operation IDs resolved locally.
-- The valid sequence had no forward output references; the invalid sequence referenced activation's unavailable output.
-- The valid CloudFormation resource graph was acyclic; the intentionally invalid variant had a cycle.
-- Relative links/anchors and a named private-pattern scan passed. Native property names were checked against official documentation.
+This is a bounded example checker, not a general AAPI validator, a standard conformance suite, a workflow engine or a security boundary for untrusted code. Catalog/admission metadata is custom to the fictional application. A trusted checkout is assumed; production catalog authentication and policy enforcement are not implemented.
 
-These were in-memory/static checks, not a shipped validator. No CloudFormation template-validation service, live API, executor, planner, application-state check, authorization integration, deployment, cross-runtime equivalence test or independent human review was performed. Schema validity does not validate the illustrative application's policy.
+The Open Workflow expression recognizer supports only these fixtures; it is not a jq interpreter. Matching the projected calls/bindings does not prove general runtime equivalence. The OpenAPI document is checked through the referenced operation/request/result shapes, not a complete OpenAPI conformance implementation.
 
-The three remaining Mermaid diagrams were rendered with the browser-free `beautiful-mermaid` 1.1.3 renderer, rasterized with `rsvg-convert`, and independently inspected as images on 2026-11-24. Equivalent literal presentation colors were used for rasterizer compatibility; diagram text and geometry were preserved during rasterization. They were legible and consistent with their text equivalents. This is static-diagram review, not visual verification of GitHub's embedded renderer or page layout. Public HTML and commit-pinned source availability were checked separately. The review was AI-assisted; no independent human expert assessment is claimed.
+Schema checks cannot establish live state, approval, execution effects, safe retries or rollback. No actual HTTP/AWS calls, CloudFormation validation service, agent inference or runtime execution are performed. A schema-valid native declaration can still violate the application's ownership rule. Fixtures demonstrate that distinction, not production correctness.
 
-The main workflow uses the owner-selected phase-grid SVG, with its review-only option title replaced by "Agent-assembled work order" and its geometry, stage headings, responsibility rows and steps preserved. The public asset was checked for valid XML, scripts and external references, rendered with `rsvg-convert`, and independently inspected as an image before publication. The README preserves an accessible text equivalent. This is static asset verification, not a browser check of GitHub's page layout.
+CloudFormation's `AWSTemplateFormatVersion: 2010-09-09` does not pin every provider implementation. Its existing sample is checked as a resource-reference graph, not deployed.
 
-## Reproduction boundary
+## Existing visual evidence
 
-The check procedure uses ordinary JSON parsing and schema validation, plus inspection of local references and dependency edges. It is not shipped as an AAPI conformance suite. For an independent review, report the exact files/spec versions inspected and distinguish parser, schema, semantic and runtime results.
-
-CloudFormation's `AWSTemplateFormatVersion: 2010-09-09` identifies its template format, not a frozen release of every resource provider. The target account, region, provider behavior and allowed actions would require a separately reviewed real environment.
+The phase-grid SVG and three Mermaid diagrams are unchanged by this example-checking addition. Their earlier AI-assisted static rendering/image inspections remain the evidence for those exact assets. They are not a browser check of GitHub's page layout or an independent human expert assessment. No private review material is required to run the tracked checks.

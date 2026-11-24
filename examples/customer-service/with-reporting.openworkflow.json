@@ -1,0 +1,130 @@
+{
+  "document": {
+    "dsl": "1.0.1",
+    "namespace": "examples",
+    "name": "activate-with-reporting",
+    "version": "1.0.0",
+    "summary": "Application-owned approved method; offline illustration only."
+  },
+  "input": {
+    "schema": {
+      "document": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z0-9-]+$"
+          }
+        },
+        "required": [
+          "customerId"
+        ]
+      }
+    }
+  },
+  "do": [
+    {
+      "configureBilling": {
+        "call": "http",
+        "with": {
+          "method": "put",
+          "endpoint": "${ \"https://service.example.invalid/customers/\" + $workflow.input.customerId + \"/billing\" }",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "cycle": "monthly"
+          },
+          "output": "content"
+        },
+        "output": {
+          "schema": {
+            "document": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "billingRecordId": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "billingRecordId"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "activateService": {
+        "call": "http",
+        "with": {
+          "method": "put",
+          "endpoint": "${ \"https://service.example.invalid/customers/\" + $workflow.input.customerId + \"/service\" }",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "package": "standard",
+            "billingRecordId": "${ .billingRecordId }"
+          },
+          "output": "content"
+        },
+        "output": {
+          "schema": {
+            "document": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "serviceId": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "serviceId"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "enableReporting": {
+        "call": "http",
+        "with": {
+          "method": "put",
+          "endpoint": "${ \"https://service.example.invalid/customers/\" + $workflow.input.customerId + \"/reporting\" }",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "serviceId": "${ .serviceId }",
+            "enabled": true
+          },
+          "output": "content"
+        },
+        "output": {
+          "schema": {
+            "document": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "reportingEnabled": {
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "required": [
+                "reportingEnabled"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

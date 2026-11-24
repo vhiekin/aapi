@@ -1,0 +1,104 @@
+{
+  "exampleVersion": "1",
+  "status": "Illustrative application-specific admission fixture; not standardized AAPI syntax. Trusted only as part of an operator-controlled checkout, never from an author submission.",
+  "api": {
+    "file": "openapi.json",
+    "sha256": "25daada2d74e5f3e94a63296edb8692bded657f8f2da2d7abb9420e80ca8bcd0"
+  },
+  "allowedAuthorFields": [
+    "method",
+    "inputs"
+  ],
+  "methods": {
+    "monthly-with-reporting": {
+      "purpose": "Activate monthly standard service and reporting",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z0-9-]+$"
+          }
+        },
+        "required": [
+          "customerId"
+        ]
+      },
+      "operationOrder": [
+        "configureBilling",
+        "activateService",
+        "enableReporting"
+      ],
+      "declarations": {
+        "arazzo": {
+          "file": "work-order.arazzo.json",
+          "sha256": "aebc0f81117b99303eefb19eb3ef0076697a63a02f25052ec962564e6afdbd44"
+        },
+        "openWorkflow": {
+          "file": "with-reporting.openworkflow.json",
+          "sha256": "27948d583f27472301e8dda32459b505a1e041797e2ef0c6bebd5f09dac6ee37"
+        }
+      }
+    },
+    "monthly-without-reporting": {
+      "purpose": "Activate monthly standard service without reporting",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z0-9-]+$"
+          }
+        },
+        "required": [
+          "customerId"
+        ]
+      },
+      "operationOrder": [
+        "configureBilling",
+        "activateService"
+      ],
+      "declarations": {
+        "arazzo": {
+          "file": "without-reporting.arazzo.json",
+          "sha256": "95c5f045f49ebffb22649fd4e0a686a00c82203109699703f097c44fa7d95ff1"
+        },
+        "openWorkflow": {
+          "file": "without-reporting.openworkflow.json",
+          "sha256": "24c99a62b681392e939d4082acdc798a6c8de4d2f0a683370fa5bff2d2c190fd"
+        }
+      }
+    }
+  },
+  "components": {
+    "configureBilling": {
+      "purpose": "Configure monthly billing",
+      "guards": [
+        "customer-eligible"
+      ],
+      "predictedEffect": "billing configured for the selected customer"
+    },
+    "activateService": {
+      "purpose": "Activate standard service",
+      "guards": [
+        "customer-eligible",
+        "billing-same-customer",
+        "billing-monthly"
+      ],
+      "predictedEffect": "service active for the selected customer"
+    },
+    "enableReporting": {
+      "purpose": "Enable reporting",
+      "guards": [
+        "customer-eligible",
+        "service-same-customer",
+        "service-active"
+      ],
+      "predictedEffect": "reporting enabled"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "description": "Expected results are compared with checker-derived results; they do not drive guard decisions.",
+  "cases": [
+    {
+      "id": "monthly-with-reporting",
+      "submission": "submissions/with-reporting.json",
+      "scenario": "eligible",
+      "expected": {
+        "stage": "complete",
+        "code": "accepted-fixture",
+        "guardPassed": [
+          "configureBilling",
+          "activateService",
+          "enableReporting"
+        ]
+      }
+    },
+    {
+      "id": "monthly-without-reporting",
+      "submission": "submissions/without-reporting.json",
+      "scenario": "eligible",
+      "expected": {
+        "stage": "complete",
+        "code": "accepted-fixture",
+        "guardPassed": [
+          "configureBilling",
+          "activateService"
+        ]
+      }
+    },
+    {
+      "id": "wrong-customer-billing",
+      "submission": "submissions/with-reporting.json",
+      "scenario": "wrong-customer-billing",
+      "expected": {
+        "stage": "operation-guard",
+        "code": "billing-owner-mismatch",
+        "guardPassed": [
+          "configureBilling"
+        ]
+      }
+    },
+    {
+      "id": "initially-ineligible",
+      "submission": "submissions/with-reporting.json",
+      "scenario": "initially-ineligible",
+      "expected": {
+        "stage": "preflight",
+        "code": "customer-ineligible",
+        "guardPassed": []
+      }
+    },
+    {
+      "id": "eligibility-drift",
+      "submission": "submissions/with-reporting.json",
+      "scenario": "eligibility-lost-before-activation",
+      "expected": {
+        "stage": "operation-guard",
+        "code": "customer-ineligible",
+        "guardPassed": [
+          "configureBilling"
+        ]
+      }
+    },
+    {
+      "id": "unknown-method",
+      "submission": "submissions/unapproved-method.json",
+      "scenario": "eligible",
+      "expected": {
+        "stage": "admission",
+        "code": "unknown-method",
+        "guardPassed": []
+      }
+    },
+    {
+      "id": "self-approval-field",
+      "submission": "submissions/self-approved.json",
+      "scenario": "eligible",
+      "expected": {
+        "stage": "admission",
+        "code": "author-fields",
+        "guardPassed": []
+      }
+    }
+  ]
+}
