@@ -28,7 +28,7 @@ python3 -m venv .venv
 
 ## Results for this revision
 
-Author run on 2026-11-24: `python3 tools/check_examples.py` passed all seven cases, both native formats for both methods, schema/definition hashes, call/binding projections, ordering/cycle negatives and 38 local links. The wrong-customer case was refused at the activation guard with `billing-owner-mismatch`; the drift case was refused before activation, while initial ineligibility was refused during preflight. Independent persona reviews and rerun are pending.
+Author run on 2026-11-24: `python3 tools/check_examples.py` passed all seven cases, both native formats for both methods, schema/definition hashes, call/binding projections, ordering/cycle negatives and 38 local links. The wrong-customer case was refused at the activation guard with `billing-owner-mismatch`; the drift case was refused before activation, while initial ineligibility was refused during preflight. Three independent AI-assisted persona re-reviews passed: application developer and senior architect at `fcc86e3bd207e21a70457a1e5bae9d0ef1e6946c`; open-source maintainer at `41e724461ae800ce7a4768dd3f2e42924efbe85f` after the conditional dependency pin was corrected. Each independently reran the bounded checker. Additional in-memory probes refused changed service ownership, lost eligibility before reporting, and a billing output with no authoritative record. These are simulated review perspectives, not assessments or endorsements by external human experts. The checks ran on Python 3.14.6 with all seven exact installed pins; Python 3.10–3.12 dependency coverage was checked from package metadata, not by running additional interpreters.
 
 ## What this does not prove
 
