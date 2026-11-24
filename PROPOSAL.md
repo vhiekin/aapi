@@ -59,19 +59,20 @@ No model response, description, suggested action or schema annotation is an appr
 
 ## Reuse first
 
-The standards occupy different layers; select a compatible native format/runtime pair.
+### Standards layers, not execution steps
+
+These are unnumbered description, composition and execution layers. Select a compatible native format/runtime pair; the connecting lines do not indicate a workflow.
 
 ```mermaid
 flowchart TB
-  S["JSON Schema / OpenAPI"] --> C["Application catalog"]
-  C --> A["Agent authors"]
-  F["Native format rules"] --> D["Native declaration"]
-  A --> D
-  D --> G["Validation + human approval"]
-  G --> R["Matching native runtime"]
+  S["Description layer<br/>Schemas and capability descriptions<br/>e.g. JSON Schema / OpenAPI"]
+  C["Composition layer<br/>Choose a native declaration format<br/>CloudFormation OR Arazzo OR Open Workflow"]
+  R["Execution layer<br/>Use a compatible runtime<br/>for the selected format"]
+  S --- C
+  C --- R
 ```
 
-Text equivalent: schemas and API descriptions help define the catalog; the agent writes a native declaration under the chosen format's rules. Validation and approval precede the matching runtime. CloudFormation templates target CloudFormation; Arazzo targets a compatible Arazzo executor; Open Workflow targets a compatible Open Workflow runtime. One engine is not assumed to execute every dialect.
+Text equivalent: the description layer explains capabilities and data; the composition layer holds the chosen native declaration; the execution layer is its compatible runtime. CloudFormation templates target CloudFormation, Arazzo targets a compatible Arazzo executor, and Open Workflow targets a compatible Open Workflow runtime. These are alternatives, not three steps or one universal engine. The validation and approval path is shown in the README workflow.
 
 Keep a native one-operation declaration where that meets the application's needs. For multiple operations, try the existing workflow/resource language, catalog reuse and supported extensions before introducing a new representation. A compiler, planner or adapter is optional and should solve a demonstrated mismatch.
 

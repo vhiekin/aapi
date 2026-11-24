@@ -25,9 +25,13 @@ The approved method “storage plus queue” permits the queue and bucket to be 
 [template.json](template.json) uses `AWSTemplateFormatVersion: 2010-09-09`, resource types/properties and intrinsic references. There is no AAPI extension.
 
 ```mermaid
-flowchart LR
-  B["Create bucket"] -->|"name + ARN"| P["Attach TLS policy"]
-  Q["Create encrypted queue<br/>independent"]
+flowchart TB
+  subgraph Storage["Storage: required order"]
+    B["Create bucket"] -->|"bucket name + ARN"| P["Attach TLS policy"]
+  end
+  subgraph Queue["Independent: any order"]
+    Q["Create encrypted queue"]
+  end
 ```
 
 Text equivalent: create the bucket before attaching its policy. The queue has no dependency on either and may be created independently under this example's approved policy. The labeled arrow carries data and implies required order.

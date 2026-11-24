@@ -29,9 +29,9 @@ The descriptions explain application rules. A real application must enforce them
 It uses ordinary Arazzo `steps` sequencing, `operationId`, path parameters, request bodies, success criteria and output expressions:
 
 ```mermaid
-flowchart LR
-  B["Configure billing"] -->|"billingRecordId"| A["Activate service"]
-  A -->|"serviceId"| R["Enable reporting"]
+flowchart TB
+  B["1. Configure billing"] -->|"billingRecordId"| A["2. Activate service"]
+  A -->|"serviceId"| R["3. Enable reporting"]
 ```
 
 Text equivalent: billing configuration precedes activation, which precedes reporting. The arrows require that order; their labels identify output-to-input bindings. The prerequisite state—billing configured, then service active—is a separate application condition, even though this method aligns all three relationships.

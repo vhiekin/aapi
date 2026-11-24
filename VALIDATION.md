@@ -26,7 +26,7 @@ Author static checks on 2026-11-24 passed:
 
 These were in-memory/static checks, not a shipped validator. No CloudFormation template-validation service, live API, executor, planner, application-state check, authorization integration, deployment, cross-runtime equivalence test or independent human review was performed. Schema validity does not validate the illustrative application's policy.
 
-Four GitHub-native Mermaid diagrams have text equivalents. No local Mermaid parser/CLI was available; syntax and rendering require the separate visible GitHub review before claiming diagram verification.
+The four revised Mermaid sources were rendered with the browser-free `beautiful-mermaid` 1.1.3 renderer, rasterized with `rsvg-convert`, and independently inspected as images on 2026-11-24. Equivalent literal presentation colors were used for rasterizer compatibility; diagram text and geometry were preserved during rasterization. All four were legible and consistent with their text equivalents, including the main workflow's single numbered top-to-bottom path. This is static-diagram review, not visual verification of GitHub's embedded renderer or page layout. Public HTML and commit-pinned source availability were checked separately. The review was AI-assisted; no independent human expert assessment is claimed.
 
 ## Reproduction boundary
 
