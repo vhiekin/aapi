@@ -1,0 +1,20 @@
+{
+  "description": "Pinned unmodified official schema/license bytes for offline example checks. Not an AAPI schema.",
+  "files": [
+    {
+      "file": "arazzo-1.0-schema.json",
+      "source": "https://spec.openapis.org/arazzo/1.0/schema/2025-10-15",
+      "sha256": "b8715bd824fffcb2accf5077977d37c9e7a15be60d785e7a3a51cf600fd46ad4"
+    },
+    {
+      "file": "open-workflow-1.0.1-schema.yaml",
+      "source": "https://raw.githubusercontent.com/open-workflow-specification/specification/v1.0.1/schema/workflow.yaml",
+      "sha256": "67e328b71ada0516f64ad876a53c2a73eaf102e82d32d0052e6f118c8eeda9eb"
+    },
+    {
+      "file": "LICENSE-APACHE-2.0.txt",
+      "source": "https://raw.githubusercontent.com/open-workflow-specification/specification/v1.0.1/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  ]
+}

@@ -1,0 +1,357 @@
+{
+  "description": "Controlled hypothetical observations, not API responses captured from a service. Each before snapshot is authoritative only inside this offline experiment.",
+  "scenarios": {
+    "eligible": {
+      "initial": {
+        "customers": {
+          "customer-example": {
+            "eligible": true
+          },
+          "customer-other": {
+            "eligible": true
+          }
+        },
+        "billingRecords": {},
+        "services": {}
+      },
+      "observations": [
+        {
+          "operationId": "configureBilling",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": true
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {},
+            "services": {}
+          },
+          "response": {
+            "billingRecordId": "billing-example"
+          },
+          "status": 200
+        },
+        {
+          "operationId": "activateService",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": true
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {
+              "billing-example": {
+                "customerId": "customer-example",
+                "cycle": "monthly"
+              }
+            },
+            "services": {}
+          },
+          "response": {
+            "serviceId": "service-example"
+          },
+          "status": 200
+        },
+        {
+          "operationId": "enableReporting",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": true
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {
+              "billing-example": {
+                "customerId": "customer-example",
+                "cycle": "monthly"
+              }
+            },
+            "services": {
+              "service-example": {
+                "customerId": "customer-example",
+                "active": true
+              }
+            }
+          },
+          "response": {
+            "reportingEnabled": true
+          },
+          "status": 200
+        }
+      ]
+    },
+    "wrong-customer-billing": {
+      "initial": {
+        "customers": {
+          "customer-example": {
+            "eligible": true
+          },
+          "customer-other": {
+            "eligible": true
+          }
+        },
+        "billingRecords": {},
+        "services": {}
+      },
+      "observations": [
+        {
+          "operationId": "configureBilling",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": true
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {},
+            "services": {}
+          },
+          "response": {
+            "billingRecordId": "billing-other"
+          },
+          "status": 200
+        },
+        {
+          "operationId": "activateService",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": true
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {
+              "billing-other": {
+                "customerId": "customer-other",
+                "cycle": "monthly"
+              }
+            },
+            "services": {}
+          },
+          "response": {
+            "serviceId": "service-example"
+          },
+          "status": 200
+        },
+        {
+          "operationId": "enableReporting",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": true
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {
+              "billing-example": {
+                "customerId": "customer-example",
+                "cycle": "monthly"
+              }
+            },
+            "services": {
+              "service-example": {
+                "customerId": "customer-example",
+                "active": true
+              }
+            }
+          },
+          "response": {
+            "reportingEnabled": true
+          },
+          "status": 200
+        }
+      ]
+    },
+    "initially-ineligible": {
+      "initial": {
+        "customers": {
+          "customer-example": {
+            "eligible": false
+          },
+          "customer-other": {
+            "eligible": true
+          }
+        },
+        "billingRecords": {},
+        "services": {}
+      },
+      "observations": [
+        {
+          "operationId": "configureBilling",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": false
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {},
+            "services": {}
+          },
+          "response": {
+            "billingRecordId": "billing-example"
+          },
+          "status": 200
+        },
+        {
+          "operationId": "activateService",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": false
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {
+              "billing-example": {
+                "customerId": "customer-example",
+                "cycle": "monthly"
+              }
+            },
+            "services": {}
+          },
+          "response": {
+            "serviceId": "service-example"
+          },
+          "status": 200
+        },
+        {
+          "operationId": "enableReporting",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": false
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {
+              "billing-example": {
+                "customerId": "customer-example",
+                "cycle": "monthly"
+              }
+            },
+            "services": {
+              "service-example": {
+                "customerId": "customer-example",
+                "active": true
+              }
+            }
+          },
+          "response": {
+            "reportingEnabled": true
+          },
+          "status": 200
+        }
+      ]
+    },
+    "eligibility-lost-before-activation": {
+      "initial": {
+        "customers": {
+          "customer-example": {
+            "eligible": true
+          },
+          "customer-other": {
+            "eligible": true
+          }
+        },
+        "billingRecords": {},
+        "services": {}
+      },
+      "observations": [
+        {
+          "operationId": "configureBilling",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": true
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {},
+            "services": {}
+          },
+          "response": {
+            "billingRecordId": "billing-example"
+          },
+          "status": 200
+        },
+        {
+          "operationId": "activateService",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": false
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {
+              "billing-example": {
+                "customerId": "customer-example",
+                "cycle": "monthly"
+              }
+            },
+            "services": {}
+          },
+          "response": {
+            "serviceId": "service-example"
+          },
+          "status": 200
+        },
+        {
+          "operationId": "enableReporting",
+          "before": {
+            "customers": {
+              "customer-example": {
+                "eligible": false
+              },
+              "customer-other": {
+                "eligible": true
+              }
+            },
+            "billingRecords": {
+              "billing-example": {
+                "customerId": "customer-example",
+                "cycle": "monthly"
+              }
+            },
+            "services": {
+              "service-example": {
+                "customerId": "customer-example",
+                "active": true
+              }
+            }
+          },
+          "response": {
+            "reportingEnabled": true
+          },
+          "status": 200
+        }
+      ]
+    }
+  }
+}

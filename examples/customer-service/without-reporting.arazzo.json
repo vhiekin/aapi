@@ -1,0 +1,89 @@
+{
+  "arazzo": "1.0.1",
+  "info": {
+    "title": "Monthly standard service without reporting",
+    "version": "0.1.0",
+    "description": "Application-owned approved method. Author selects this definition and supplies permitted inputs; this description is not authority."
+  },
+  "sourceDescriptions": [
+    {
+      "name": "customerService",
+      "url": "openapi.json",
+      "type": "openapi"
+    }
+  ],
+  "workflows": [
+    {
+      "workflowId": "activateWithoutReporting",
+      "summary": "Configure monthly billing and activate the standard service",
+      "description": "Approved fictional method: execute in order. Application must enforce eligibility and ownership; authoring agent cannot execute.",
+      "inputs": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z0-9-]+$"
+          }
+        },
+        "required": [
+          "customerId"
+        ]
+      },
+      "steps": [
+        {
+          "stepId": "configureBilling",
+          "operationId": "configureBilling",
+          "parameters": [
+            {
+              "name": "customerId",
+              "in": "path",
+              "value": "$inputs.customerId"
+            }
+          ],
+          "requestBody": {
+            "contentType": "application/json",
+            "payload": {
+              "cycle": "monthly"
+            }
+          },
+          "successCriteria": [
+            {
+              "condition": "$statusCode == 200"
+            }
+          ],
+          "outputs": {
+            "billingRecordId": "$response.body#/billingRecordId"
+          }
+        },
+        {
+          "stepId": "activateService",
+          "operationId": "activateService",
+          "parameters": [
+            {
+              "name": "customerId",
+              "in": "path",
+              "value": "$inputs.customerId"
+            }
+          ],
+          "requestBody": {
+            "contentType": "application/json",
+            "payload": {
+              "package": "standard",
+              "billingRecordId": "$steps.configureBilling.outputs.billingRecordId"
+            }
+          },
+          "successCriteria": [
+            {
+              "condition": "$statusCode == 200"
+            }
+          ],
+          "outputs": {
+            "serviceId": "$response.body#/serviceId"
+          }
+        }
+      ]
+    }
+  ]
+}

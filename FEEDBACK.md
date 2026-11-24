@@ -11,8 +11,8 @@ Please help falsify the need for additional specification work. References to ex
 7. **Can someone reproduce the interpretation independently?** A second domain and runtime are welcome. Show both a valid work order and a structurally valid but semantically forbidden one.
 8. **Is the author/executor boundary practical?** Can your stack accept native declarations from an untrusted authoring process with no apply permissions, then validate, preview and execute them independently?
 
-For Arazzo contributors: the example intentionally uses 1.0.1 sequencing and output expressions. Would 1.1, reusable workflows, or existing extensions eliminate any apparent metadata gap? We are not requesting an inference step or relying on unreleased actor-in-the-loop fields.
+For Arazzo contributors: the example uses two pinned 1.0.1 methods, native sequencing and output expressions. Would 1.1, reusable workflows, or existing extensions eliminate any apparent metadata gap? We are not requesting an inference step or relying on unreleased actor-in-the-loop fields.
 
-For Open Workflow contributors: the [customer mapping](examples/customer-service/README.md#open-workflow-mapping) uses existing task/function and data-flow constructs. Is a catalog/profile enough to expose the application rules to authors while retaining ordinary runtime execution?
+For Open Workflow contributors: the [native customer declarations](examples/customer-service/README.md#open-workflow-mapping) use 1.0.1 HTTP tasks and data flow, with official-schema checks and a bounded call/binding comparison. The controlled wrong-customer-record case passes native structure/order but fails an application ownership guard. Is a catalog/profile enough to expose the application rules to authors while retaining ordinary runtime execution?
 
 Please include the exact specification/tool version, the relevant declaration, whether it was parsed/validated/executed, and what remains application policy. “No new standard is needed” is explicitly welcome.

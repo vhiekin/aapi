@@ -1,0 +1,7 @@
+{
+  "method": "monthly-with-reporting",
+  "inputs": {
+    "customerId": "customer-example"
+  },
+  "approved": true
+}

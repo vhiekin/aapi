@@ -1,32 +1,81 @@
-# Example: activate a customer with reporting
+# Reproducible example: choose an approved customer method
 
-**Fictional API; native Arazzo 1.0.1 declaration; no service has been called.**
+**Offline experiment with fictional state and API. No LLM, HTTP service or workflow runtime is executed.**
 
-## Human request and clarification
+## What this demonstrates
 
-Fictional request: “Activate the standard service with monthly billing and reporting for this customer.”
+An author can choose between **two application-owned methods** and supply one permitted customer input:
 
-The agent asks which customer, when activation should begin, and whether this includes charging money or historical invoices. Fictional answers: `customer-example`, immediate activation after approval, monthly configuration only, reporting enabled, no payment collection or historical invoicing. [inputs.json](inputs.json) carries the confirmed customer. No unresolved customer or billing choice may be guessed.
+- `monthly-with-reporting`: billing → activation → reporting.
+- `monthly-without-reporting`: billing → activation.
 
-## Approved components and method
+Both have native Arazzo 1.0.1 and Open Workflow 1.0.1 declarations. This demonstrates **method selection plus parameter substitution**, not arbitrary component composition, a general planner or an agent benchmark. The application's trust boundary is explicit; an artifact calling itself “approved” has no authority.
 
-The fictional application's contract is described by [openapi.json](openapi.json), OpenAPI 3.1.1. Its server is `https://service.example.invalid`, deliberately unusable. The bearer authorization scheme describes executor access; there is no token and the authoring agent must not receive one.
+Run all positive and negative cases from the repository root:
 
-| Operation | Purpose | Required state | Effect/output |
+```sh
+python3 tools/check_examples.py
+```
+
+Dependency installation and the full reproduction command are in [VALIDATION.md](../../VALIDATION.md).
+
+## Illustrative conversation and exact author inputs
+
+This exchange is invented for the example, not a user transcript or a recorded LLM run.
+
+> Human: Activate the standard monthly service for customer-example.
+>
+> Agent: The approved catalog offers activation with or without reporting. Should reporting be enabled?
+>
+> Human: Yes. Configure monthly billing only; do not collect payment or create historical invoices.
+>
+> Agent: I will select monthly-with-reporting and submit customer-example for application review. I cannot execute it.
+
+Reporting is genuinely unspecified in the first request; the agent must not guess. With “No,” it selects the second method. The agent-readable starting set is [approved-catalog.json](approved-catalog.json), the referenced native declarations, [openapi.json](openapi.json) and this document. The catalog exposes purpose, permitted inputs, component guard identifiers, predicted effects and each allowed operation order.
+
+The resulting [with-reporting submission](submissions/with-reporting.json) is deliberately small:
+
+```json
+{"method":"monthly-with-reporting","inputs":{"customerId":"customer-example"}}
+```
+
+[without-reporting.json](submissions/without-reporting.json) is the second valid choice. This selection envelope and catalog are **custom metadata for this fictional application**, not standardized AAPI syntax or a proposed universal grammar. The native definitions use existing standards.
+
+## Trusted admission and allowed edits
+
+The bounded checker loads the catalog from its fixed repository location, not from the author submission. Its trust assumption is an operator-controlled checkout at a reviewed commit. Hashes detect changed referenced bytes relative to that catalog; they are not signatures and do not protect a compromised checkout or malicious catalog maintainer.
+
+| Surface | Owner | Allowed author change | Admission rule |
 |---|---|---|---|
-| `configureBilling` | Select monthly billing | Customer exists and is eligible | Billing configured; string `billingRecordId` |
-| `activateService` | Activate the standard service | Billing configured for this customer | Service active; string `serviceId` |
-| `enableReporting` | Enable the reporting add-on | That customer's service is active | Reporting enabled |
+| Submission | Authoring agent/person | Choose one catalog method; set `inputs.customerId` | Exactly `method` and `inputs`; validate permitted method and input schema |
+| Native declarations | Application | None | Resolve only catalog paths and require pinned file hashes |
+| API contract and target | Application | None | Require pinned API bytes; fictional target remains `service.example.invalid` |
+| Guards and fixture observations | Application/checker | None | Evaluate actual state/ownership values; never take an author-supplied approval or guard result |
+| Runtime execution/approval | Application | None | Not implemented in this offline experiment |
 
-“Activate with reporting” is the approved method: all three operations in that order. “Activate without reporting” would stop after activation; it is an alternative to discuss, not an extra implemented workflow here.
+An input change does not change the method's billing cycle, package, operation order, endpoints or data bindings. Unknown methods and an extra `approved: true` field are negative cases. This table describes the experiment's admission scope, not a production authentication system.
 
-The descriptions explain application rules. A real application must enforce them; OpenAPI descriptions are not executable preconditions. Machine-readable sharing of those rules is the question under review, not a capability silently supplied by this sample.
+## Three kinds of prerequisite
 
-## Native work order and ordering
+| When | What is checked or predicted | Where the example shows it |
+|---|---|---|
+| Initial preflight | Selected customer exists and is eligible | `scenario.initial`; an initially ineligible customer is refused before any hypothetical operation |
+| Planning | Successful billing is expected to establish billing configured; successful activation is expected to establish an active service | Approved method order and component `predictedEffect` text; these are expected future effects, not initially required facts |
+| Immediately before each operation | Customer is still eligible; activation additionally needs the returned monthly billing record to belong to that customer; reporting needs that customer's active service | Fresh `observations[].before` snapshot for each hypothetical operation |
+| After a hypothetical result | Response schema and selected output binding are checked | `observations[].response`; no live outcome is asserted |
 
-[work-order.arazzo.json](work-order.arazzo.json), together with [inputs.json](inputs.json) and the pinned source API description, is the illustrative approval package.
+The valid initial state has **no billing record and no service**. It still passes preflight: demanding predecessor effects at the start would reject valid work. Later snapshots represent observed results, not facts inferred solely from a successful status. The drift case revokes eligibility after billing; the activation guard refuses.
 
-It uses ordinary Arazzo `steps` sequencing, `operationId`, path parameters, request bodies, success criteria and output expressions:
+[fixtures/state.json](fixtures/state.json) contains the controlled observations. [fixtures/cases.json](fixtures/cases.json) contains expectations that are compared with derived decisions; expected strings do not drive the checks. `guardPassed` lists only guards passed in an offline traversal, not executed operations.
+
+## Native work orders
+
+| Method | Arazzo 1.0.1 | Open Workflow 1.0.1 |
+|---|---|---|
+| Monthly with reporting | [work-order.arazzo.json](work-order.arazzo.json) | [with-reporting.openworkflow.json](with-reporting.openworkflow.json) |
+| Monthly without reporting | [without-reporting.arazzo.json](without-reporting.arazzo.json) | [without-reporting.openworkflow.json](without-reporting.openworkflow.json) |
+
+Arazzo uses ordered `steps`, `operationId`, request bodies, success criteria and output expressions. Open Workflow uses ordered `do` HTTP tasks, inline input/output schemas, the immutable `$workflow.input.customerId` and the preceding task's output. Both call the same fictional OpenAPI operations with the same projected payloads.
 
 ```mermaid
 flowchart TB
@@ -34,39 +83,35 @@ flowchart TB
   A -->|"serviceId"| R["3. Enable reporting"]
 ```
 
-Text equivalent: billing configuration precedes activation, which precedes reporting. The arrows require that order; their labels identify output-to-input bindings. The prerequisite state—billing configured, then service active—is a separate application condition, even though this method aligns all three relationships.
+Text equivalent: billing configuration precedes activation; the reporting method then enables reporting. The arrows require order; labels are output-to-input bindings. The without-reporting method stops after activation. State prerequisites and data flow remain distinct from ordering.
 
-Version 1.0.1 was chosen for a small documented subset and tooling compatibility, not because it is the latest Arazzo release: 1.1.0 exists. In 1.0.1 `steps` is ordered and `dependsOn` is workflow-level. This sample does not use 1.1 step-level dependencies, parallelism or unreleased actor-in-the-loop fields.
+Versions are pinned for reproducibility, not described as latest. [Arazzo 1.1.0](https://spec.openapis.org/arazzo/v1.1.0.html) and [Open Workflow 1.1.0](https://open-workflow-specification.org/blog/releases/release-110/) are newer releases. No unreleased actor-in-the-loop fields are used.
 
-The declaration has no automatic retries. A real executor must handle uncertain effects through the application's idempotency/reconciliation contract rather than blindly repeat a failed request.
+### Open Workflow mapping
 
-## Invalid case
+The former construct-only sketch is now two actual declarations checked against the official 1.0.1 schema. HTTP task bodies consume `${ .billingRecordId }` and `${ .serviceId }`; endpoint expressions read `$workflow.input.customerId` so the customer survives changes to the intermediate payload. The checker recognizes those exact expressions and compares their call/binding projection with Arazzo. It does **not** run jq or prove full runtime equivalence, HTTP error handling, retries or persistence.
 
-[invalid-order.arazzo.json](invalid-order.arazzo.json) moves reporting before activation. It still passes the document schema, but refers to an output that is not available yet and violates the approved method. The expected preflight refusal is a semantic/order check, not evidence that JSON Schema proves execution safety. No request should be sent.
+## Negative cases with different meanings
 
-## Human preview
+- **Native order:** [invalid-order.arazzo.json](invalid-order.arazzo.json) passes the document schema but reports an unavailable forward output. It is not a trusted catalog declaration, so it is also inadmissible.
+- **Application semantics:** `wrong-customer-billing` uses the unchanged approved declaration, correct sequence, valid input and a schema-valid string output. The fixture returns `billing-other`, whose authoritative record belongs to `customer-other`. The activation guard returns `billing-owner-mismatch`; activation/reporting are not admitted. Type correctness and ordering cannot establish record ownership.
+- **Temporal state:** `initially-ineligible` fails initial preflight; `eligibility-drift` starts eligible but fails immediately before activation.
+- **Author authority:** unknown methods and self-approval fields fail admission.
 
-For `customer-example`: configure monthly billing, activate the standard service using the billing record returned for this customer, then enable reporting on the returned service. No payment will be collected and no historical invoice created by these example operations. All three operations must occur in order; none is approved for parallel execution. Preview inputs, API/workflow versions, target and all late-bound relationships before asking for approval.
+Inspect the semantic negative alone:
 
-A real executor verifies customer eligibility, permissions, definitions and ordering before effects; resolves runtime outputs only from this approved chain; rechecks application state; and records outcomes. Failures can leave billing configured without an active service. That is a reported partial result, not an automatic rollback promise.
+```sh
+python3 tools/check_examples.py --case wrong-customer-billing
+```
 
-## Open Workflow mapping
+The checker exits nonzero if a case is unexpectedly accepted or refused, a positive check fails, a negative is not detected, a pinned definition/schema changes, or a local link breaks.
 
-The same method can be expressed using the existing [Open Workflow v1.0.0 constructs](https://github.com/open-workflow-specification/specification/blob/v1.0.0/dsl.md):
+## Human preview and production boundary
 
-| Arazzo example | Open Workflow mapping |
-|---|---|
-| Ordered three-step workflow | A `do` task list with three sequential named tasks |
-| API operation call | A `call: openapi` task bound to the approved API operation, or `call: http` with explicit method/endpoint |
-| Request body and output expressions | Native task `input`, `output` and `export` data-flow mappings; explicitly preserve customer and earlier IDs |
-| Reusable approved method | A reusable function in `use.functions` or a pinned external catalog, with schema-constrained inputs/outputs |
-| No parallel permission | Do not introduce a `fork`; if a later method permits one, validate its resource/state conflicts |
-| Human authorization | Application gate before starting the resolved workflow instance; no inference task required |
+Illustrative preview: for customer-example, configure monthly billing and activate standard service, with reporting only if the chosen method includes it. No payment collection or historical invoicing. Show the selected method, inputs, target, definition versions and output bindings before asking for exact-work approval.
 
-This is a construct-level mapping, not an additional executable file or a claim of conversion equivalence. Implementers should supply an exact native document and runtime result before asserting equivalence. The [Java reference runtime](https://github.com/open-workflow-specification/sdk-java/tree/main/impl) demonstrates that independent execution machinery exists; no runtime was invoked here.
+The package supplies no human-approval ceremony, credentials, production policy store, executor or API implementation. A real integration must independently enforce admission, protect the catalog, bind approval, recheck actual state, manage uncertain effects and report partial outcomes. There are no automatic retry or rollback claims.
 
-## What is already covered?
-
-Arazzo covers sequence, operation references, input/output bindings and step-success criteria. OpenAPI covers typed requests/results. The remaining research question concerns shared discovery and enforcement of domain-specific applicability, prerequisite/effect vocabulary, permitted methods and clarification needs. Existing descriptions, profiles and adapters may be sufficient. No `x-aapi-*` semantics are invented in these files.
+Arazzo/Open Workflow already cover the declared sequence and bindings. This small experiment asks whether the remaining catalog/guard semantics should stay application metadata or map to an existing interoperable profile. It does not establish the need for a new language.
 
 [Validation limits](../../VALIDATION.md) · [Feedback questions](../../FEEDBACK.md)

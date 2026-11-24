@@ -86,4 +86,6 @@ Start with these two examples. Ask maintainers to encode the same requirements u
 
 Then repeat the exercise with independently implemented applications. A useful counterexample is a valid native declaration that violates an important composition rule that cannot be expressed or mapped without private conventions. A useful negative result is that documented native mechanisms already solve the problem.
 
+The tracked customer experiment now exercises two application-approved methods and controlled guards with an offline checker. This demonstrates constrained method selection and parameter substitution, not arbitrary assembly, LLM capability, live execution or a production trust boundary. Catalog/guard metadata is explicitly application-specific; mappings to broader standards remain open.
+
 At present we have an architecture pattern and an exploration of a possible interoperability profile/specification. A standard would require independent implementations, interoperability evidence, adoption and governance. This repository establishes none of those and makes no novelty claim.

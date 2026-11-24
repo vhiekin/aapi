@@ -3,7 +3,7 @@
   "info": {
     "title": "Illustrative customer activation work order",
     "version": "0.1.0",
-    "description": "Agent-authored proposal for separate application validation and human approval. No live service."
+    "description": "Application-owned approved method. Author selects this definition and supplies permitted inputs; this description is not authority."
   },
   "sourceDescriptions": [
     {
@@ -23,7 +23,8 @@
         "properties": {
           "customerId": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^[a-z0-9-]+$"
           }
         },
         "required": [
