@@ -12,9 +12,9 @@ python3 -m venv .venv
 .venv/bin/python tools/check_examples.py
 ```
 
-**The single verification command is `.venv/bin/python tools/check_examples.py`.** Once installed, it runs offline. An existing interpreter with the exact versions may instead use `python3 tools/check_examples.py`. The checker verifies installed versions and vendored schema checksums. A mismatch or unexpected positive/negative result exits nonzero.
+**The single verification command is `.venv/bin/python tools/check_examples.py`.** Once installed, it runs offline. An existing interpreter with the exact versions may instead use `python3 tools/check_examples.py`. The checker verifies installed versions and vendored schema checksums. A mismatch or unexpected positive/negative result exits nonzero. The unconditional typing-extensions pin covers referencing’s dependency on Python 3.10–3.12 and is checked on every supported interpreter.
 
-[requirements-checks.txt](requirements-checks.txt) pins all six check dependencies. [schemas/manifest.json](schemas/manifest.json) pins official schema bytes/source URLs; [upstream notices](schemas/README.md) identify licenses and offline reference closure. No hidden Git files, user-home inputs or downloaded schema cache is required.
+[requirements-checks.txt](requirements-checks.txt) pins all seven check dependencies. [schemas/manifest.json](schemas/manifest.json) pins official schema bytes/source URLs; [upstream notices](schemas/README.md) identify licenses and offline reference closure. No hidden Git files, user-home inputs or downloaded schema cache is required.
 
 ## Declared checks
 
