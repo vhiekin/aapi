@@ -1,8 +1,8 @@
-# Reproduce the bounded example checks
+# Verification: offline checks and native runtime experiment
 
-The local artifact-check venue uses Python 3.10+ with pinned dependencies. No service, account, secret, cloud permission, model or workflow runtime is needed. The checker reads only tracked examples/schemas and writes no files. It does not use the network.
+The offline artifact-check venue uses Python 3.10+ with pinned dependencies. No service, account, secret, cloud permission, model or workflow runtime is needed. The checker reads only tracked examples/schemas and writes no files. It does not use the network.
 
-## Exact commands
+## Offline check commands
 
 From a fresh checkout, install the pinned dependencies once (this installation may use the package index):
 
@@ -36,10 +36,14 @@ This is a bounded example checker, not a general AAPI validator, a standard conf
 
 The Open Workflow expression recognizer supports only these fixtures; it is not a jq interpreter. Matching the projected calls/bindings does not prove general runtime equivalence. The OpenAPI document is checked through the referenced operation/request/result shapes, not a complete OpenAPI conformance implementation.
 
-Schema checks cannot establish live state, approval, execution effects, safe retries or rollback. No actual HTTP/AWS calls, CloudFormation validation service, agent inference or runtime execution are performed. A schema-valid native declaration can still violate the application's ownership rule. Fixtures demonstrate that distinction, not production correctness.
+Schema checks cannot establish live state, approval, execution effects, safe retries or rollback. The offline checker performs no HTTP/AWS calls, CloudFormation validation service calls, agent inference or runtime execution. The separate native experiment below does execute a released runtime against localhost mocks. A schema-valid native declaration can still violate the application's ownership rule. Fixtures demonstrate that distinction, not production correctness.
 
 CloudFormation's `AWSTemplateFormatVersion: 2010-09-09` does not pin every provider implementation. Its existing sample is checked as a resource-reference graph, not deployed.
 
 ## Existing visual evidence
 
 The phase-grid SVG and three Mermaid diagrams are unchanged by this example-checking addition. Their earlier AI-assisted static rendering/image inspections remain the evidence for those exact assets. They are not a browser check of GitHub's page layout or an independent human expert assessment. No private review material is required to run the tracked checks.
+
+## Separate native runtime experiment
+
+The [native catalog/runtime experiment](experiments/native-runtime/README.md) declares a separate Linux build/test-host venue with JDK 17 and a localhost mock; it does not run on the author workstation. Its exact dependency-preparation and bounded Java commands are documented before execution. Author and independent AI-assisted reruns met all nine expectations with source and 49-JAR hash agreement. The owned-loopback unapproved endpoint was explicitly **accepted** by the default runtime. The experiment records exact results, failure phases, effects, source hashes and limits; no production authorization or LLM/human-approval integration is claimed. The earlier offline checks above are not runtime proof. No community response or main publication is authorized by a test result alone.

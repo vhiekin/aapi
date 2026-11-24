@@ -1,0 +1,12 @@
+call: http
+with:
+  method: put
+  endpoint: '${ $workflow.input.businessBase + "/customers/" + .customerId + "/service" }'
+  headers:
+    Content-Type: application/json
+  body:
+    package: standard
+    billingRecordId: '${ .billingRecordId }'
+  output: content
+output:
+  as: '${ {customerId: $workflow.input.customerId, serviceId: .serviceId} }'

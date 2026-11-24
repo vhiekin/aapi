@@ -1,0 +1,10 @@
+do:
+  - billing:
+      call: configure-billing:1.0.0@local
+      with:
+        customerId: '${ .customerId }'
+  - activation:
+      call: activate-service:1.0.0@local
+      with:
+        customerId: '${ .customerId }'
+        billingRecordId: '${ .billingRecordId }'

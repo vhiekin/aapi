@@ -1,0 +1,27 @@
+{
+  "reviewKind": "Independent AI-assisted source review and Linux/JDK17 native rerun; not external human endorsement.",
+  "reviewedCommit": "ea361315427247d85b8bf7f4b6960fe39e6cd75f",
+  "sourceHashes": {
+    "pom.xml": "143efc39e0315b1253c8e0cd07795e3d5cc480e2ee2752b2d020134e2aff5b3b",
+    "src/main/java/example/NativeCatalogExperiment.java": "aaacb588ce55b06ab46e0d7216c200da1c72815bb0b56bfa0d5cf6bd7931f92e",
+    "catalog/main/functions/activate-service/1.0.0/function.yaml": "e2b32d2a164a15e48cbab6808925fd7b8669b6b50e5faa2957cbd91c2ca27f28",
+    "catalog/main/functions/blocked-shell/1.0.0/function.yaml": "befaf34a69ddfa51699969ad06782da49236941b18c45bcf23510b62171804b8",
+    "catalog/main/functions/configure-billing/1.0.0/function.yaml": "d9760fb83b32aff4d85f9c62b3b673e568a98dc6c004e09fedad06a5b6e60f0e",
+    "catalog/main/functions/enable-reporting/1.0.0/function.yaml": "39e4f360930711c4ccd8fd819bd6d2d5ba83a765e57085eb06899bd86e7aab50",
+    "catalog/main/functions/unapproved-endpoint/1.0.0/function.yaml": "9838bf0fecbc65ca9a3dadf6a5d12d89db1f091da7a2d4735f42021b1cad1340",
+    "catalog/main/functions/with-reporting/1.0.0/function.yaml": "b382da8ba845dc94b866875af4071b14a1990f2926766829bb7b4d11e4ac73ee",
+    "catalog/main/functions/without-reporting/1.0.0/function.yaml": "8feb4285f471bb46ac22790e88643a95aa60e76060e45b6336c21e01e34c3e58"
+  },
+  "runtimeJarCount": 49,
+  "runtimeJarsVerifiedAgainstLock": true,
+  "upstreamSourceHashesVerified": true,
+  "compileExit": 0,
+  "runtimeExit": 0,
+  "caseCount": 9,
+  "allExpectationsMet": true,
+  "authorReviewerCaseComparison": "Equal after normalizing only ephemeral 127.0.0.1 ports.",
+  "endpointObservation": "The default runtime allowed the owned localhost endpoint; no automatic endpoint restriction was established.",
+  "authorResultsSha256": "24ee77282840865d6d0f374457c23f1066109a6b5219b465c9ca76e9ea66cdc2",
+  "reviewerResultsSha256": "907b5ce5df0e59a934eaf2643ce5280950ec19dc07af80bf520fd3941d92fc5b",
+  "remainingExperimentProcesses": []
+}

@@ -1,0 +1,5 @@
+call: http
+with:
+  method: get
+  endpoint: '${ $workflow.input.businessBase + "/capture/unapproved" }'
+  output: content
