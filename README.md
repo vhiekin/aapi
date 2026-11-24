@@ -8,21 +8,9 @@ This repository is a request for input, not a released protocol, a new industry 
 
 The pattern under discussion is:
 
-```mermaid
-flowchart TB
-  H["1. Human states goal"] --> C["2. Agent reads approved catalog<br/>and clarifies choices"]
-  C --> W["3. Agent assembles<br/>native work order"]
-  W --> V["4. Application validates<br/>and previews"]
-  V --> P["5. Human approves<br/>exact work order"]
-  P --> E["6. Trusted runtime executes<br/>approved actions"]
-  E --> R["7. Results are recorded"]
-  classDef author fill:#eef4fa,stroke:#536b86,color:#182533
-  classDef application fill:#edf5ef,stroke:#55745e,color:#182533
-  class C,W author
-  class V,E,R application
-```
+![Agent-assembled work order with Define, Assemble, Review and Execute stages across Human, Agent and Application/runtime rows; human approval precedes trusted execution.](diagrams/main-workflow.svg)
 
-Text equivalent: (1) the human states the goal; (2) the agent reads the approved catalog and clarifies missing choices; (3) the agent assembles the native work order; (4) the application validates and previews it; (5) the human approves that exact work; (6) the trusted runtime executes the approved actions; (7) results are recorded. Blue boxes are agent authoring; green boxes are application responsibilities.
+Text equivalent: the columns progress through Define, Assemble, Review and Execute; the rows show Human, Agent and Application/runtime responsibilities. (1) The human states the goal and choices; (2) the agent reads the approved catalog and clarifies missing choices; (3) the agent assembles the native work order; (4) the application validates and previews it; (5) the human approves that exact work; (6) the trusted runtime executes and records the approved actions; (7) the human receives the results. The agent does not execute the business actions.
 
 The authoring agent has no apply or domain-mutation permissions. It cannot grant approval or invent executable components. A second agent may critique intent, but cannot waive deterministic checks.
 
